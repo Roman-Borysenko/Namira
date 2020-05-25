@@ -13,6 +13,5 @@ namespace Namira.Entities
         public string Name { get; set; }
         [Required, StringLength(60, MinimumLength = 1)]
         public string Slug { get; set; }
-        public Language Language { get; set; }
     }
 }

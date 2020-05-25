@@ -17,8 +17,12 @@ namespace Namira.Entities
         public string MetaDescription { get; set; }
         [Required, StringLength(1000, MinimumLength = 50)]
         public string MetaKeywords { get; set; }
-        [Column("ParentId")]
+        public int? CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
         public List<Category> Subcategories { get; set; }
-        public Language Language { get; set; }
+        [Required]
+        public int LanguageId { get; set; }
+        [NotMapped, ForeignKey("LanguageId")]
+        public Language Language { get; set; } 
     }
 }

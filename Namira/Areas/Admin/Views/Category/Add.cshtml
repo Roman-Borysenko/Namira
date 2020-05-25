@@ -1,32 +1,83 @@
-﻿@model Category
+﻿@using Namira.Areas.Admin.ViewModels;
+@model CategoryViewModel;
+
+@{ ViewBag.Title = "Add category"; }
+
 <div class="container">
-    <h1>Add category</h1>
+    <h1>@ViewBag.Title</h1>
     <form asp-area="Admin" asp-action="Add" asp-controller="Category" method="post">
-        <div class="form-group">
-            <label asp-for="Name">Name</label>
-            <input asp-for="Name" type="text" class="form-control" id="name">
-            <small id="name" class="form-text text-muted"></small>
-        </div>
+        <ul class="nav nav-tabs">
+            @{ int i = 0; }
+            @foreach (var item in Model.Languages)
+            {
+                <li class="nav-item">
+                    <a class="nav-link @{ Write(i == 0 ? "active" : ""); i++; }" data-toggle="tab" href="#@item.Slug">@item.Name</a>
+                </li>
+            }
+        </ul>
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div class="tab-content">
+            @for (int j = 0; j < Model.Languages.Count; j++)
+            {
+                var status = j == 0 ? "active" : "";
+                <div class="tab-pane @status" id="@Model.Languages[j].Slug">
+                    <div class="form-group">
+                        <label asp-for="@Model.Categories[@j].Name">Name</label>
+                        <input asp-for="@Model.Categories[@j].Name" type="text" class="form-control" id="name">
+                        <span asp-validation-for="@Model.Categories[@j].Name" class="form-text text-muted"></span>
+                    </div>
 
-        <div class="form-group">
-            <label asp-for="MetaDescription">Meta Description</label>
-            <textarea asp-for="MetaDescription" class="form-control"></textarea>
-            <small id="name" class="form-text text-muted"></small>
-        </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Categories[@j].MetaDescription">Meta Description</label>
+                        <textarea asp-for="@Model.Categories[@j].MetaDescription" class="form-control" id="description"></textarea>
+                        <span asp-validation-for="@Model.Categories[@j].MetaDescription" class="form-text text-muted"></span>
+                    </div>
 
-        <div class="form-group">
-            <label asp-for="MetaKeywords">Meta Description</label>
-            <textarea asp-for="MetaKeywords" class="form-control"></textarea>
-            <small id="name" class="form-text text-muted"></small>
-        </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Categories[@j].MetaKeywords">Meta Keywords</label>
+                        <textarea asp-for="@Model.Categories[@j].MetaKeywords" class="form-control" id="keywords"></textarea>
+                        <span asp-validation-for="@Model.Categories[@j].MetaKeywords" class="form-text text-muted"></span>
+                    </div>
 
-        <div class="form-group">
-            <label asp-for="Language"></label>
-            <select asp-for="Language" asp-items="ViewBag.Languages" class="form-control"></select>
-        </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Categories[@j].CategoryId">Meta Keywords</label>
+                        @*<select asp-for="@Model[@j].CategoryId" asp-items="ViewBag.Categories" class="form-control"></select>*@
+                        <select asp-for="@Model.Categories[@j].CategoryId" class="form-control">
+                            <option disabled selected>Select</option>
+                            @foreach(var item in Model.ParentCategories)
+                            {
+                                if(item.LanguageId == Model.Languages[j].Id)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                    if(item.Subcategories != null && item.Subcategories.Count > 0)
+                                    {
+                                        @foreach(var sub in item.Subcategories)
+                                        {
+                                            <option value="@sub.Id">@sub.Name</option>
+                                        }
+                                    }
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="@Model.Categories[@j].CategoryId" class="form-text text-muted"></span>
+                    </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button>
+
+                    <div class="form-group">
+                        <input asp-for="@Model.Categories[@j].LanguageId" type="hidden" class="form-control" value="@Model.Languages[j].Id">
+                        @*<select asp-for="Language" asp-items="ViewBag.Languages" class="form-control"></select>*@
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            }
         </div>
     </form>
 </div>
+
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
