@@ -22,9 +22,9 @@ namespace Namira.Areas.Admin.Controllers
         {
             context = new DataContext();
         }
-        public IActionResult Index()
-        {
-            return View();
+        public async Task<IActionResult> Index()
+        {      
+            return View(await context.Categories.ToListAsync());
         }
         public async Task<List<Entities.Language>> GetLanguages()
         {

@@ -1,0 +1,27 @@
+﻿@model Namira.Areas.Admin.ViewModels.DataOutputViewModel
+
+<table class="table table-hover mt-2">
+    <thead>
+        <tr>
+            @foreach (var item in Model.Fields)
+            {
+                <th scope="col">@item</th>
+            }
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var data in Model.Data)
+        {
+            <tr>
+                @foreach (var field in Model.Fields)
+                {
+                    <td>@Model.DataType.GetProperty(field).GetValue(data)</td>
+                }
+                <td><a href="#">Edit</a></td>
+                <td><a href="#">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
