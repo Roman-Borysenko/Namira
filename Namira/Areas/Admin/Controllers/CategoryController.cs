@@ -65,10 +65,15 @@ namespace Namira.Areas.Admin.Controllers
                 return View(cvm);
             }
 
-            categories.ForEach(c => c.Slug = c.Name.GenerateSlug());
-
             var mapped = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Category, Entities.Category>()));
             var entities = mapped.Map<List<Entities.Category>>(categories);
+
+            var guid = Guid.NewGuid().ToString();
+            foreach (var item in entities)
+            {
+                item.Slug = item.Name.GenerateSlug();
+                item.LanguageGroup = guid;
+            }
 
             await context.AddRangeAsync(entities);
             await context.SaveChangesAsync();

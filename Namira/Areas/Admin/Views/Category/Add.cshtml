@@ -19,6 +19,8 @@
         <div class="tab-content">
             @for (int j = 0; j < Model.Languages.Count; j++)
             {
+                <input asp-for="@Model.Categories[@j].Id" type="hidden" />
+
                 var status = j == 0 ? "active" : "";
                 <div class="tab-pane @status" id="@Model.Languages[j].Slug">
                     <div class="form-group">

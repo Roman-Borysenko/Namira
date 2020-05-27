@@ -4,7 +4,7 @@ namespace Namira.Areas.Admin.Models
 {
     public class Category
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Required, StringLength(120, MinimumLength = 2)]
         public string Name { get; set; }
         [StringLength(140, MinimumLength = 1)]

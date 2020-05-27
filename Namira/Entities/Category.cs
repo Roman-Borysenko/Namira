@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Namira.Entities
 {
@@ -23,6 +20,8 @@ namespace Namira.Entities
         [Required]
         public int LanguageId { get; set; }
         [NotMapped, ForeignKey("LanguageId")]
-        public Language Language { get; set; } 
+        public Language Language { get; set; }
+        [Required]
+        public string LanguageGroup { get; set; }
     }
 }
