@@ -22,9 +22,12 @@ namespace Namira.Areas.Admin.Controllers
         {
             context = new DataContext();
         }
-        public async Task<IActionResult> Index()
-        {      
-            return View(await context.Categories.ToListAsync());
+        public async Task<IActionResult> Index(int id = 1)
+        {
+            var paginator = new Paginator() { QuantityRecords = await context.Categories.CountAsync(), SizePage = 3, Page = id, 
+                PaginatorRoute = new PaginatorRoute() { Area = "Admin", Controller = "Category", Action = "Index" } };
+            ViewBag.Paginator = paginator;
+            return View(await context.Categories.OrderByDescending(c => c.Id).Skip(paginator.Skipped).Take(paginator.SizePage).ToListAsync());
         }
         public async Task<List<Entities.Language>> GetLanguages()
         {

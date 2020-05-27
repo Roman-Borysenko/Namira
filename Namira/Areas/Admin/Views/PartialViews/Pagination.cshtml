@@ -1,0 +1,62 @@
+﻿@model Namira.Areas.Admin.Models.Paginator
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @{ var previous = Model.Page <= 1 ? "disabled" : ""; }
+        <li class="page-item @previous">
+            <a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="@{ Write(Model.Page - 1); }" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+
+        @if (Model.QuantityPages > 10 && Model.Page < 6)
+        {
+            for (int i = 1; i <= 7; i++)
+            {
+                var status = i == Model.Page ? "active" : "";
+                <li class="page-item @status"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" , asp-route-id="@i">@i</a></li>
+            }
+            <li class="page-item"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="8">...</a></li>
+            <li class="page-item"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="@Model.QuantityPages">@Model.QuantityPages</a></li>
+        }
+        else if (Model.QuantityPages > 10 && Model.QuantityPages - Model.Page < 5)
+        {
+            <li class="page-item"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="1">1</a></li>
+            <li class="page-item"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="@{ Write(Model.QuantityPages - 7); }">...</a></li>
+            for (int i = Model.QuantityPages - 6; i <= Model.QuantityPages; i++)
+            {
+                var status = i == Model.Page ? "active" : "";
+                <li class="page-item @status"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="@i">@i</a></li>
+            }
+        }
+        else if (Model.QuantityPages <= 10)
+        {
+            for (int i = 1; i <= Model.QuantityPages; i++)
+            {
+                var status = i == Model.Page ? "active" : "";
+                <li class="page-item @status"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="@i">@i</a></li>
+            }
+        }
+        else
+        {
+            <li class="page-item"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="1">1</a></li>
+            <li class="page-item"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="@{ Write(Model.Page - 3); }">...</a></li>
+            for (int i = Model.Page - 2; i <= Model.Page + 2; i++)
+            {
+                var status = i == Model.Page ? "active" : "";
+                <li class="page-item @status"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="@i">@i</a></li>
+            }
+            <li class="page-item"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="@{ Write(Model.Page + 3); }">...</a></li>
+            <li class="page-item"><a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="@Model.QuantityPages">@Model.QuantityPages</a></li>
+        }
+
+        @{ var next = Model.Page >= Model.QuantityPages ? "disabled" : ""; }
+        <li class="page-item @next">
+            <a class="page-link" asp-area="@Model.PaginatorRoute.Area" asp-controller="@Model.PaginatorRoute.Controller" asp-action="@Model.PaginatorRoute.Action" asp-route-id="@{ Write(Model.Page+1); }" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>
