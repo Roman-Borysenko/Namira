@@ -25,7 +25,7 @@ namespace Namira.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int id = 1)
         {
             var paginator = new Paginator() { QuantityRecords = await context.Categories.CountAsync(), SizePage = 3, Page = id, 
-                PaginatorRoute = new PaginatorRoute() { Area = "Admin", Controller = "Category", Action = "Index" } };
+                PaginatorRoute = new Link() { Area = "Admin", Controller = "Category", Action = "Index" } };
             ViewBag.Paginator = paginator;
             return View(await context.Categories.OrderByDescending(c => c.Id).Skip(paginator.Skipped).Take(paginator.SizePage).ToListAsync());
         }
@@ -79,6 +79,19 @@ namespace Namira.Areas.Admin.Controllers
             await context.SaveChangesAsync();
 
             return RedirectToRoute("admin_area", new { controller = "Category", action = "Index" });
+        }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var languageGroup = await context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            var entities = await context.Categories.Where(c => c.LanguageGroup == context.Categories.FirstOrDefault(c => c.Id == id).LanguageGroup).ToListAsync();
+
+            var mapped = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Entities.Category, Category>()));
+            var categories = mapped.Map<List<Category>>(entities);
+
+            var cvm = await GetCvm();
+            cvm.Categories.AddRange(categories);
+
+            return View("Add", cvm);
         }
     }
 }

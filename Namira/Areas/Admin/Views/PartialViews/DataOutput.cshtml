@@ -19,7 +19,7 @@
                 {
                     <td>@Model.DataType.GetProperty(field).GetValue(data)</td>
                 }
-                <td><a href="#">Edit</a></td>
+                <td><a asp-area="@Model.EditLink.Area" asp-controller="@Model.EditLink.Controller" asp-action="@Model.EditLink.Action" asp-route-id="@Model.DataType.GetProperty("Id").GetValue(data)">Edit</a></td>
                 <td><a href="#">Delete</a></td>
             </tr>
         }

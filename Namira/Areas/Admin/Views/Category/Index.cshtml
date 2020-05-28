@@ -5,7 +5,9 @@
     <h1>Category</h1>
     <a asp-area="admin" asp-action="Add" asp-controller="category" class="btn btn-outline-success">Add category</a>
 
-    @await Html.PartialAsync("../PartialViews/DataOutput", new DataOutputViewModel { Data = Model, DataType = typeof(Namira.Entities.Category), Fields = new string[] { "Id", "Name", "MetaKeywords" } })
+    @await Html.PartialAsync("../PartialViews/DataOutput", new DataOutputViewModel { Data = Model, 
+    DataType = typeof(Namira.Entities.Category), Fields = new string[] { "Id", "Name", "MetaKeywords" }, 
+    EditLink = new Link() { Area = "Admin", Controller = "Category", Action = "Edit" } })
     
     @await Html.PartialAsync("../PartialViews/Pagination", ViewBag.Paginator as Paginator)
 </div>
