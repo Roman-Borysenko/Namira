@@ -119,5 +119,13 @@ namespace Namira.Areas.Admin.Controllers
 
             return RedirectToRoute("admin_area", new { controller = "Category", action = "Index" });
         }
+
+        public async Task<IActionResult> Delete(int id) 
+        {
+            context.Categories.RemoveRange(context.Categories.Include("Subcategories").Where(c => c.LanguageGroup == context.Categories.SingleOrDefault(i => i.Id == id).LanguageGroup).ToList());
+            await context.SaveChangesAsync();
+
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace Namira.Areas.Admin.ViewModels
         public Type DataType { get; set; }
         public string[] Fields { get; set; } 
         public Link EditLink { get; set; }
+        public Link DeleteLink { get; set; }
     }
 }
