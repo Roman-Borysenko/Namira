@@ -1,8 +1,10 @@
 ﻿@using Namira.Areas.Admin.ViewModels
 @model List<Namira.Entities.Category>
 
+@{ ViewBag.Title = "Category"; }
+
 <div class="container">
-    <h1>Category</h1>
+    <h1>@ViewBag.Title</h1>
     <a asp-area="admin" asp-action="Add" asp-controller="category" class="btn btn-outline-success">Add category</a>
 
     @await Html.PartialAsync("../PartialViews/DataOutput", new DataOutputViewModel { Data = Model, 

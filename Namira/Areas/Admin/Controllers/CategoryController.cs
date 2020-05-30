@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Namira.Areas.Admin.Models;
 using Namira.Areas.Admin.ViewModels;
 using Namira.Data;
@@ -82,7 +83,6 @@ namespace Namira.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var languageGroup = await context.Categories.FirstOrDefaultAsync(c => c.Id == id);
             var entities = await context.Categories.Where(c => c.LanguageGroup == context.Categories.FirstOrDefault(c => c.Id == id).LanguageGroup).ToListAsync();
 
             var mapped = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Entities.Category, Category>()));
@@ -91,7 +91,32 @@ namespace Namira.Areas.Admin.Controllers
             var cvm = await GetCvm();
             cvm.Categories.AddRange(categories);
 
+            ViewBag.Page = "edit";
             return View("Add", cvm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(List<Category> categories)
+        {
+            if (!ModelState.IsValid)
+            {
+                var cvm = await GetCvm();
+                cvm.Categories = categories;
+                return View(cvm);
+            }
+
+            var entities = new List<Entities.Category>();
+
+            foreach (var item in categories)
+            {
+                var entity = context.Categories.FirstOrDefault(i => i.Id == item.Id);
+                new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Category, Entities.Category>())).Map<Category, Entities.Category>(item, entity);
+                entities.Add(entity);
+            }
+
+            context.UpdateRange(entities);
+            await context.SaveChangesAsync();
+
+            return RedirectToRoute("admin_area", new { controller = "Category", action = "Index" });
         }
     }
 }

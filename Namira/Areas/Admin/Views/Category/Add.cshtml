@@ -1,11 +1,14 @@
 ﻿@using Namira.Areas.Admin.ViewModels;
 @model CategoryViewModel;
 
-@{ ViewBag.Title = "Add category"; }
+@{ 
+    ViewBag.Title = "Add category";
+    var action = ViewBag.Page == "edit" ? "Edit" : "Add";
+}
 
 <div class="container">
     <h1>@ViewBag.Title</h1>
-    <form asp-area="Admin" asp-action="Add" asp-controller="Category" method="post">
+    <form asp-area="Admin" asp-action="@action" asp-controller="Category" method="post">
         <ul class="nav nav-tabs">
             @{ int i = 0; }
             @foreach (var item in Model.Languages)

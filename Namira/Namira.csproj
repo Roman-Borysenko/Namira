@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>
