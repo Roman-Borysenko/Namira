@@ -108,6 +108,7 @@ namespace Namira.Areas.Admin.Controllers
 
             foreach (var item in categories)
             {
+                item.Slug = item.Name.GenerateSlug();
                 var entity = context.Categories.FirstOrDefault(i => i.Id == item.Id);
                 new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Category, Entities.Category>())).Map<Category, Entities.Category>(item, entity);
                 entities.Add(entity);
