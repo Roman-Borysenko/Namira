@@ -432,3 +432,5 @@ C:\Users\CLEY\source\repos\Namira\Namira\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Namira.csproj.CoreCompileInputs.cache
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Namira.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Namira.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Brand\Add.cshtml.g.cs
+C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Brand\Index.cshtml.g.cs
