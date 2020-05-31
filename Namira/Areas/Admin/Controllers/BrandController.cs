@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Namira.Areas.Admin.Models;
 using Namira.Data;
 using SlugGenerator;
@@ -16,9 +18,17 @@ namespace Namira.Areas.Admin.Controllers
         {
             context = new DataContext();
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int id = 1)
         {
-            return View();
+            var paginator = new Paginator()
+            {
+                QuantityRecords = await context.Brands.CountAsync(),
+                SizePage = 3,
+                Page = id,
+                PaginatorRoute = new Link() { Area = "Admin", Controller = "Brand", Action = "Index" }
+            };
+            ViewBag.Paginator = paginator;
+            return View(await context.Brands.OrderByDescending(c => c.Id).Skip(paginator.Skipped).Take(paginator.SizePage).ToListAsync());
         }
         public IActionResult Add()
         {
