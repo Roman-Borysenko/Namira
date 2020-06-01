@@ -1,0 +1,22 @@
+﻿@using Namira.Areas.Admin.ViewModels
+@model List<Namira.Entities.Country>
+
+@{ ViewBag.Title = "Country"; }
+
+<div class="container">
+    <h1>@ViewBag.Title</h1>
+    <a asp-area="admin" asp-action="add" asp-controller="country" class="btn btn-outline-success">Add country</a>
+
+    @await Html.PartialAsync(
+        "../PartialViews/DataOutput",
+        new DataOutputViewModel
+            {
+                Data = Model,
+                DataType = typeof(Namira.Entities.Country),
+                Fields = new string[] { "Id", "Name", "Slug" },
+                EditLink = new Link() { Area = "Admin", Controller = "Country", Action = "Edit" },
+                DeleteLink = new Link() { Area = "Admin", Controller = "Country", Action = "Delete" }
+            })
+
+    @await Html.PartialAsync("../PartialViews/Pagination", ViewBag.Paginator as Paginator)
+</div>
