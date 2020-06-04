@@ -46,7 +46,6 @@
 
                     <div class="form-group">
                         <label asp-for="@Model.Data[@j].CategoryId">Meta Keywords</label>
-                        @*<select asp-for="@Model[@j].CategoryId" asp-items="ViewBag.Categories" class="form-control"></select>*@
                         <select asp-for="@Model.Data[@j].CategoryId" class="form-control">
                             <option disabled selected>Select</option>
                             @foreach(var item in Model.ParentCategories)
