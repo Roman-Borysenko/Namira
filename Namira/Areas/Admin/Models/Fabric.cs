@@ -4,18 +4,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Namira.Entities
+namespace Namira.Areas.Admin.Models
 {
     public class Fabric
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Required, StringLength(120, MinimumLength = 2)]
         public string Name { get; set; }
-        [Required, StringLength(140, MinimumLength = 1)]
+        [StringLength(140, MinimumLength = 1)]
         public string Slug { get; set; }
         [Required]
-        public Language Language { get; set; }
-        [Required]
-        public string LanguageGroup { get; set; }
+        public int LanguageId { get; set; }
     }
 }

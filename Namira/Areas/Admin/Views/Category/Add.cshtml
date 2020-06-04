@@ -1,5 +1,5 @@
 ﻿@using Namira.Areas.Admin.ViewModels;
-@model CategoryViewModel;
+@model CategoryViewModel<Category>;
 
 @{ 
     ViewBag.Title = "Add category";
@@ -22,32 +22,32 @@
         <div class="tab-content">
             @for (int j = 0; j < Model.Languages.Count; j++)
             {
-                <input asp-for="@Model.Categories[@j].Id" type="hidden" />
+                <input asp-for="@Model.Data[@j].Id" type="hidden" />
 
                 var status = j == 0 ? "active" : "";
                 <div class="tab-pane @status" id="@Model.Languages[j].Slug">
                     <div class="form-group">
-                        <label asp-for="@Model.Categories[@j].Name">Name</label>
-                        <input asp-for="@Model.Categories[@j].Name" type="text" class="form-control" id="name">
-                        <span asp-validation-for="@Model.Categories[@j].Name" class="form-text text-muted"></span>
+                        <label asp-for="@Model.Data[@j].Name">Name</label>
+                        <input asp-for="@Model.Data[@j].Name" type="text" class="form-control" id="name">
+                        <span asp-validation-for="@Model.Data[@j].Name" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="@Model.Categories[@j].MetaDescription">Meta Description</label>
-                        <textarea asp-for="@Model.Categories[@j].MetaDescription" class="form-control" id="description"></textarea>
-                        <span asp-validation-for="@Model.Categories[@j].MetaDescription" class="form-text text-muted"></span>
+                        <label asp-for="@Model.Data[@j].MetaDescription">Meta Description</label>
+                        <textarea asp-for="@Model.Data[@j].MetaDescription" class="form-control" id="description"></textarea>
+                        <span asp-validation-for="@Model.Data[@j].MetaDescription" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="@Model.Categories[@j].MetaKeywords">Meta Keywords</label>
-                        <textarea asp-for="@Model.Categories[@j].MetaKeywords" class="form-control" id="keywords"></textarea>
-                        <span asp-validation-for="@Model.Categories[@j].MetaKeywords" class="form-text text-muted"></span>
+                        <label asp-for="@Model.Data[@j].MetaKeywords">Meta Keywords</label>
+                        <textarea asp-for="@Model.Data[@j].MetaKeywords" class="form-control" id="keywords"></textarea>
+                        <span asp-validation-for="@Model.Data[@j].MetaKeywords" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="@Model.Categories[@j].CategoryId">Meta Keywords</label>
+                        <label asp-for="@Model.Data[@j].CategoryId">Meta Keywords</label>
                         @*<select asp-for="@Model[@j].CategoryId" asp-items="ViewBag.Categories" class="form-control"></select>*@
-                        <select asp-for="@Model.Categories[@j].CategoryId" class="form-control">
+                        <select asp-for="@Model.Data[@j].CategoryId" class="form-control">
                             <option disabled selected>Select</option>
                             @foreach(var item in Model.ParentCategories)
                             {
@@ -64,12 +64,12 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="@Model.Categories[@j].CategoryId" class="form-text text-muted"></span>
+                        <span asp-validation-for="@Model.Data[@j].CategoryId" class="form-text text-muted"></span>
                     </div>
 
 
                     <div class="form-group">
-                        <input asp-for="@Model.Categories[@j].LanguageId" type="hidden" class="form-control" value="@Model.Languages[j].Id">
+                        <input asp-for="@Model.Data[@j].LanguageId" type="hidden" class="form-control" value="@Model.Languages[j].Id">
                         @*<select asp-for="Language" asp-items="ViewBag.Languages" class="form-control"></select>*@
                     </div>
 

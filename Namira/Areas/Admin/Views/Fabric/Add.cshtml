@@ -1,0 +1,52 @@
+﻿@using Namira.Areas.Admin.ViewModels;
+@model CategoryViewModel<Fabric>;
+
+@{
+    ViewBag.Title = "Add fabric";
+    var action = ViewBag.Page == "edit" ? "Edit" : "Add";
+}
+
+<div class="container">
+    <h1>@ViewBag.Title</h1>
+    <form asp-area="Admin" asp-action="@action" asp-controller="Fabric" method="post">
+        <ul class="nav nav-tabs">
+            @{ int i = 0; }
+            @foreach (var item in Model.Languages)
+            {
+                <li class="nav-item">
+                    <a class="nav-link @{ Write(i == 0 ? "active" : ""); i++; }" data-toggle="tab" href="#@item.Slug">@item.Name</a>
+                </li>
+            }
+        </ul>
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div class="tab-content">
+            @for (int j = 0; j < Model.Languages.Count; j++)
+            {
+                <input asp-for="@Model.Data[@j].Id" type="hidden" />
+
+                var status = j == 0 ? "active" : "";
+                <div class="tab-pane @status" id="@Model.Languages[j].Slug">
+                    <div class="form-group">
+                        <label asp-for="@Model.Data[@j].Name">Name</label>
+                        <input asp-for="@Model.Data[@j].Name" type="text" class="form-control" id="name">
+                        <span asp-validation-for="@Model.Data[@j].Name" class="form-text text-muted"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input asp-for="@Model.Data[@j].LanguageId" type="hidden" class="form-control" value="@Model.Languages[j].Id">
+                        @*<select asp-for="Language" asp-items="ViewBag.Languages" class="form-control"></select>*@
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

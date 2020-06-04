@@ -38,10 +38,10 @@ namespace Namira.Areas.Admin.Controllers
         {
             return await context.Categories.Include("Subcategories").Where(c => c.CategoryId == null).ToListAsync();
         }
-        public async Task<CategoryViewModel> GetCvm()
+        public async Task<CategoryViewModel<Category>> GetCvm()
         {
-            var cvm = new CategoryViewModel();
-            cvm.Categories = new List<Category>();
+            var cvm = new CategoryViewModel<Category>();
+            cvm.Data = new List<Category>();
             cvm.Languages = await GetLanguages();
             cvm.ParentCategories = await GetCategories();
 
@@ -52,22 +52,22 @@ namespace Namira.Areas.Admin.Controllers
             var cvm = await GetCvm();
 
             for (int i = 0; i < cvm.Languages.Count; i++)
-                cvm.Categories.Add(new Category());
+                cvm.Data.Add(new Category());
 
             return View(cvm);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(List<Category> categories)
+        public async Task<IActionResult> Add(List<Category> data)
         {
             if(!ModelState.IsValid)
             {
                 var cvm = await GetCvm();
-                cvm.Categories = categories;
+                cvm.Data = data;
                 return View(cvm);
             }
 
             var mapped = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Category, Entities.Category>()));
-            var entities = mapped.Map<List<Entities.Category>>(categories);
+            var entities = mapped.Map<List<Entities.Category>>(data);
 
             var guid = Guid.NewGuid().ToString();
             foreach (var item in entities)
@@ -89,24 +89,24 @@ namespace Namira.Areas.Admin.Controllers
             var categories = mapped.Map<List<Category>>(entities);
 
             var cvm = await GetCvm();
-            cvm.Categories.AddRange(categories);
+            cvm.Data.AddRange(categories);
 
             ViewBag.Page = "edit";
             return View("Add", cvm);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(List<Category> categories)
+        public async Task<IActionResult> Edit(List<Category> data)
         {
             if (!ModelState.IsValid)
             {
                 var cvm = await GetCvm();
-                cvm.Categories = categories;
+                cvm.Data = data;
                 return View(cvm);
             }
 
             var entities = new List<Entities.Category>();
 
-            foreach (var item in categories)
+            foreach (var item in data)
             {
                 item.Slug = item.Name.GenerateSlug();
                 var entity = context.Categories.FirstOrDefault(i => i.Id == item.Id);

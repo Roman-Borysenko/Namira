@@ -440,3 +440,5 @@ C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Adm
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Currency\Index.cshtml.g.cs
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Language\Add.cshtml.g.cs
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Language\Index.cshtml.g.cs
+C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Fabric\Add.cshtml.g.cs
+C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Fabric\Index.cshtml.g.cs
