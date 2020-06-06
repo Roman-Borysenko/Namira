@@ -429,9 +429,6 @@ C:\Users\CLEY\source\repos\Namira\Namira\bin\Debug\netcoreapp3.1\SlugGenerator.d
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\PartialViews\DataOutput.cshtml.g.cs
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\PartialViews\Pagination.cshtml.g.cs
 C:\Users\CLEY\source\repos\Namira\Namira\bin\Debug\netcoreapp3.1\AutoMapper.dll
-C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Namira.csproj.CoreCompileInputs.cache
-C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Namira.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Namira.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Brand\Add.cshtml.g.cs
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Brand\Index.cshtml.g.cs
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Country\Add.cshtml.g.cs
@@ -446,3 +443,6 @@ C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Adm
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Size\Index.cshtml.g.cs
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Product\Add.cshtml.g.cs
 C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Product\Index.cshtml.g.cs
+C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Namira.csproj.CoreCompileInputs.cache
+C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Namira.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\CLEY\source\repos\Namira\Namira\obj\Debug\netcoreapp3.1\Namira.MvcApplicationPartsAssemblyInfo.cache

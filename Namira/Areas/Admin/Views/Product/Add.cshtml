@@ -93,13 +93,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="@Model.Product[@j].FabricsId">Countries</label>
-                        <select asp-for="@Model.Product[@j].FabricsId" asp-items="@Model.Fabrics" class="form-control"></select>
+                        <label asp-for="@Model.Product[@j].FabricsId">Fabrics</label>
+                        <select asp-for="@Model.Product[@j].FabricsId" asp-items="@Model.Fabrics" class="form-control selectpicker" multiple></select>
                         <span asp-validation-for="@Model.Product[@j].FabricsId" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="@Model.Product[@j].CategoryId">Meta Keywords</label>
+                        <label asp-for="@Model.Product[@j].CategoryId">Categories</label>
                         <select asp-for="@Model.Product[@j].CategoryId" class="form-control">
                             <option disabled selected>Select</option>
                             @foreach(var item in Model.Categories)
@@ -129,7 +129,13 @@
     </form>
 </div>
 
+@section styles {
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-select.min.css" />
+}
+
 @section scripts{
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap-select.js"></script>
 }
