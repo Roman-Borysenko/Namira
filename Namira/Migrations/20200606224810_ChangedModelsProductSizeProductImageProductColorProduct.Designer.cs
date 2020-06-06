@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Namira.Data;
 
 namespace Namira.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200606224810_ChangedModelsProductSizeProductImageProductColorProduct")]
+    partial class ChangedModelsProductSizeProductImageProductColorProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,6 +241,11 @@ namespace Namira.Migrations
                     b.Property<DateTime>("Create")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(10000);
+
                     b.Property<int>("Discount")
                         .HasColumnType("int");
 
@@ -246,6 +253,24 @@ namespace Namira.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
+
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MetaDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("MetaKeywords")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(120)")
+                        .HasMaxLength(120);
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -255,6 +280,11 @@ namespace Namira.Migrations
 
                     b.Property<int>("Raiting")
                         .HasColumnType("int");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(130)")
+                        .HasMaxLength(130);
 
                     b.Property<DateTime>("Update")
                         .HasColumnType("datetime2");
@@ -269,6 +299,8 @@ namespace Namira.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("CountryId");
+
+                    b.HasIndex("LanguageId");
 
                     b.ToTable("Products");
                 });
@@ -314,53 +346,6 @@ namespace Namira.Migrations
                     b.HasIndex("ProductColorId");
 
                     b.ToTable("ProductImages");
-                });
-
-            modelBuilder.Entity("Namira.Entities.ProductLanguage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasMaxLength(10000);
-
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MetaDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
-
-                    b.Property<string>("MetaKeywords")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(120)")
-                        .HasMaxLength(120);
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(130)")
-                        .HasMaxLength(130);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LanguageId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductLanguages");
                 });
 
             modelBuilder.Entity("Namira.Entities.ProductSize", b =>
@@ -463,6 +448,12 @@ namespace Namira.Migrations
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Namira.Entities.Language", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Namira.Entities.ProductColor", b =>
@@ -479,21 +470,6 @@ namespace Namira.Migrations
                     b.HasOne("Namira.Entities.ProductColor", "ProductColor")
                         .WithMany("ProductImages")
                         .HasForeignKey("ProductColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Namira.Entities.ProductLanguage", b =>
-                {
-                    b.HasOne("Namira.Entities.Language", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Namira.Entities.Product", "Product")
-                        .WithMany("ProductLanguages")
-                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -29,9 +29,10 @@ namespace Namira.Data
         public DbSet<Language> Languages { get; set; }
         public DbSet<NumberPurchase> NumberPurchases { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductLanguage> ProductLanguages { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<ProductSize> ProductSize { get; set; }
         public DbSet<Size> Sizes { get; set; }
     }
 }
