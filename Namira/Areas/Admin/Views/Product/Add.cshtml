@@ -22,54 +22,36 @@
         <div class="tab-content">
             @for (int j = 0; j < Model.Languages.Count; j++)
             {
-                <input asp-for="@Model.Product[@j].Id" type="hidden" />
+                <input asp-for="@Model.ProductLanguages[@j].Id" type="hidden" />
 
                 var status = j == 0 ? "active" : "";
                 <div class="tab-pane @status" id="@Model.Languages[j].Slug">
                     <div class="form-group">
-                        <label asp-for="@Model.Product[@j].Name">Name</label>
-                        <input asp-for="@Model.Product[@j].Name" type="text" class="form-control">
-                        <span asp-validation-for="@Model.Product[@j].Name" class="form-text text-muted"></span>
+                        <label asp-for="@Model.ProductLanguages[@j].Name">Name</label>
+                        <input asp-for="@Model.ProductLanguages[@j].Name" type="text" class="form-control">
+                        <span asp-validation-for="@Model.ProductLanguages[@j].Name" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="@Model.Product[@j].Description">Description</label>
-                        <textarea asp-for="@Model.Product[@j].Description" class="form-control"></textarea>
-                        <span asp-validation-for="@Model.Product[@j].Description" class="form-text text-muted"></span>
+                        <label asp-for="@Model.ProductLanguages[@j].Description">Description</label>
+                        <textarea asp-for="@Model.ProductLanguages[@j].Description" class="form-control"></textarea>
+                        <span asp-validation-for="@Model.ProductLanguages[@j].Description" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="@Model.Product[@j].MetaDescription">Meta Description</label>
-                        <textarea asp-for="@Model.Product[@j].MetaDescription" class="form-control"></textarea>
-                        <span asp-validation-for="@Model.Product[@j].MetaDescription" class="form-text text-muted"></span>
+                        <label asp-for="@Model.ProductLanguages[@j].MetaDescription">Meta Description</label>
+                        <textarea asp-for="@Model.ProductLanguages[@j].MetaDescription" class="form-control"></textarea>
+                        <span asp-validation-for="@Model.ProductLanguages[@j].MetaDescription" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="@Model.Product[@j].MetaKeywords">Meta Keywords</label>
-                        <textarea asp-for="@Model.Product[@j].MetaKeywords" class="form-control"></textarea>
-                        <span asp-validation-for="@Model.Product[@j].MetaKeywords" class="form-text text-muted"></span>
+                        <label asp-for="@Model.ProductLanguages[@j].MetaKeywords">Meta Keywords</label>
+                        <textarea asp-for="@Model.ProductLanguages[@j].MetaKeywords" class="form-control"></textarea>
+                        <span asp-validation-for="@Model.ProductLanguages[@j].MetaKeywords" class="form-text text-muted"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="@Model.Product[@j].CategoryId">Categories</label>
-                        <select asp-for="@Model.Product[@j].CategoryId" class="form-control">
-                            <option disabled selected>Select</option>
-                            @foreach (var item in Model.Categories)
-                            {
-                                if (item.LanguageId == Model.Languages[j].Id)
-                                {
-                                    <option value="@item.Id">@item.Name</option>
-                                    if (item.Subcategories != null && item.Subcategories.Count > 0)
-                                    {
-                                        @foreach (var sub in item.Subcategories)
-                                        {
-                                            <option value="@sub.Id">@sub.Name</option>
-                                        }
-                                    }
-                                }
-                            }
-                        </select>
-                        <span asp-validation-for="@Model.Product[@j].CategoryId" class="form-text text-muted"></span>
+                        <input asp-for="@Model.ProductLanguages[@j].LanguageId" type="hidden" class="form-control" value="@Model.Languages[j].Id">
                     </div>
 
                     <div class="form-group">
@@ -79,53 +61,78 @@
             }
         </div>
 
-        @*<div class="form-group">
-            <label asp-for="@Model.Product[@j].ProductCode">ProductCode</label>
-            <input asp-for="@Model.Product[@j].ProductCode" type="text" class="form-control">
-            <span asp-validation-for="@Model.Product[@j].ProductCode" class="form-text text-muted"></span>
+        <div class="form-group">
+            <label asp-for="@Model.Product.ProductCode">ProductCode</label>
+            <input asp-for="@Model.Product.ProductCode" type="text" class="form-control">
+            <span asp-validation-for="@Model.Product.ProductCode" class="form-text text-muted"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Product[@j].Price">Price</label>
-            <input asp-for="@Model.Product[@j].Price" type="text" class="form-control">
-            <span asp-validation-for="@Model.Product[@j].Price" class="form-text text-muted"></span>
+            <label asp-for="@Model.Product.Price">Price</label>
+            <input asp-for="@Model.Product.Price" type="text" class="form-control">
+            <span asp-validation-for="@Model.Product.Price" class="form-text text-muted"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Product[@j].Discount">Discount</label>
-            <input asp-for="@Model.Product[@j].Discount" type="number" class="form-control">
-            <span asp-validation-for="@Model.Product[@j].Discount" class="form-text text-muted"></span>
+            <label asp-for="@Model.Product.Discount">Discount</label>
+            <input asp-for="@Model.Product.Discount" type="number" class="form-control">
+            <span asp-validation-for="@Model.Product.Discount" class="form-text text-muted"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Product[@j].Raiting">Raiting</label>
-            <input asp-for="@Model.Product[@j].Raiting" type="number" class="form-control">
-            <span asp-validation-for="@Model.Product[@j].Raiting" class="form-text text-muted"></span>
+            <label asp-for="@Model.Product.Raiting">Raiting</label>
+            <input asp-for="@Model.Product.Raiting" type="number" class="form-control">
+            <span asp-validation-for="@Model.Product.Raiting" class="form-text text-muted"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Product[@j].View">View</label>
-            <input asp-for="@Model.Product[@j].View" type="number" class="form-control">
-            <span asp-validation-for="@Model.Product[@j].View" class="form-text text-muted"></span>
+            <label asp-for="@Model.Product.View">View</label>
+            <input asp-for="@Model.Product.View" type="number" class="form-control">
+            <span asp-validation-for="@Model.Product.View" class="form-text text-muted"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Product[@j].BrandId">Brand</label>
-            <select asp-for="@Model.Product[@j].BrandId" asp-items="@Model.Brands" class="form-control"></select>
-            <span asp-validation-for="@Model.Product[@j].BrandId" class="form-text text-muted"></span>
+            <label asp-for="@Model.Product.NumberPurchases">Purchases</label>
+            <input asp-for="@Model.Product.NumberPurchases" type="number" class="form-control">
+            <span asp-validation-for="@Model.Product.NumberPurchases" class="form-text text-muted"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Product[@j].CountryId">Countries</label>
-            <select asp-for="@Model.Product[@j].CountryId" asp-items="@Model.Countries" class="form-control"></select>
-            <span asp-validation-for="@Model.Product[@j].CountryId" class="form-text text-muted"></span>
+            <label asp-for="@Model.Product.BrandId">Brand</label>
+            <select asp-for="@Model.Product.BrandId" asp-items="@Model.Brands" class="form-control"></select>
+            <span asp-validation-for="@Model.Product.BrandId" class="form-text text-muted"></span>
         </div>
 
         <div class="form-group">
-            <label asp-for="@Model.Product[@j].FabricsId">Fabrics</label>
-            <select asp-for="@Model.Product[@j].FabricsId" asp-items="@Model.Fabrics" class="form-control selectpicker" multiple></select>
-            <span asp-validation-for="@Model.Product[@j].FabricsId" class="form-text text-muted"></span>
-        </div>*@
+            <label asp-for="@Model.Product.CountryId">Countries</label>
+            <select asp-for="@Model.Product.CountryId" asp-items="@Model.Countries" class="form-control"></select>
+            <span asp-validation-for="@Model.Product.CountryId" class="form-text text-muted"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Product.FabricsId">Fabrics</label>
+            <select asp-for="@Model.Product.FabricsId" asp-items="@Model.Fabrics" class="form-control selectpicker" multiple></select>
+            <span asp-validation-for="@Model.Product.FabricsId" class="form-text text-muted"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Product.CategoryId">Categories</label>
+            <select asp-for="@Model.Product.CategoryId" class="form-control">
+                <option disabled selected>Select</option>
+                @foreach (var item in Model.Categories)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                    if (item.Subcategories != null && item.Subcategories.Count > 0)
+                    {
+                        @foreach (var sub in item.Subcategories)
+                        {
+                            <option value="@sub.Id">@sub.Name</option>
+                        }
+                    }
+                }
+            </select>
+            <span asp-validation-for="@Model.Product.CategoryId" class="form-text text-muted"></span>
+        </div>
 
         <div class="row">
             <div class="col-3">

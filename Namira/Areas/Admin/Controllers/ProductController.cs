@@ -25,14 +25,14 @@ namespace Namira.Areas.Admin.Controllers
         }
         private async Task<ProductViewModel> GetProductViewModel()
         {
-            var products = new List<Product>();
+            var products = new List<ProductLanguage>();
             for (int i = 0; i < await context.Languages.CountAsync(); i++)
-                products.Add(new Product());
+                products.Add(new ProductLanguage());
 
             var productViewModel = new ProductViewModel()
             {
-                Product = products,
-                Categories = await context.Categories.ToListAsync(),
+                ProductLanguages = products,
+                Categories = await context.Categories.Where(c => c.LanguageId == 1).ToListAsync(),
                 Languages = await context.Languages.ToListAsync(),
                 Brands = new SelectList(await context.Brands.ToListAsync(), "Id", "Name"),
                 Countries = new SelectList(await context.Countries.ToListAsync(), "Id", "Name"),
