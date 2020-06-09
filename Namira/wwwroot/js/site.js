@@ -76,4 +76,11 @@
             }
         })
     });
+    
+    $('.image-container').on("click", ".delete-image", function () {
+        if ($('.image-product').length != 1) {
+            $('.select-size option[value=' + selected_size[key_name + $(this).closest('.image-product').index()] + ']').removeAttr("disabled");
+            $(this).closest('.image-product').detach();
+        }
+    });
 });
