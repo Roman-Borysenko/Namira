@@ -165,6 +165,38 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Images
+                    </div>
+                    <div class="card-body">
+                        @*<img class="img-fluid" src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" />*@
+
+                        <div class="upload-demo-wrap">
+                            <div id="crop-image"></div>
+                        </div>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" accept="image/*" class="custom-file-input" id="upload-image">
+                                <label class="custom-file-label" for="inputGroupFile04">Choose image</label>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-info crop-but" type="button">Crop</button>
+                            </div>
+                        </div>
+
+                        @*<div class="card mb-3 mt-3">*@
+                            <div class="row image-container">
+                                <div class="col-3 image-product">
+                                    <img class="img-fluid crop-result" />
+                                </div>
+                            </div>
+                        @*</div>*@
+
+                    </div>
+                </div>
+
             </div>
         </form>
 
@@ -187,6 +219,7 @@
 
 @section styles {
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="~/lib/crop/croppie.css" />
 }
 
 @section scripts{
@@ -194,4 +227,5 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap-select.js"></script>
+    <script src="~/lib/crop/croppie.js"></script>
 }

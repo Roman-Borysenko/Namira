@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     var selected_size = [];
     var key_name = "item-";
+    var image_selected = false; 
 
     $('.selectpicker').selectpicker();
 
@@ -35,5 +36,44 @@
         for (key in selected_size) {
             $('.select-size option[value=' + selected_size[key] + ']').attr("disabled", "disabled");
         }
+    });
+
+/*--crop image--*/
+    $uploadCrop = $('#crop-image').croppie({
+        enableExif: true,
+        viewport: {
+            width: 400,
+            height: 400,
+            type: 'square'
+        },
+        boundary: {
+            width: 450,
+            height: 450
+        }
+    });
+
+    $('#upload-image').on('change', function () {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            $uploadCrop.croppie('bind', {
+                url: event.target.result
+            }).then(function () {
+                console.log('jQuery bind complete');
+            });
+        }
+        reader.readAsDataURL(this.files[0]);
+        image_selected = true;
+    });
+
+    $('.crop-but').click(function (event) {
+        $uploadCrop.croppie('result', {
+            type: 'canvas',
+            size: 'viewport'
+        }).then(function (response) {
+            if (image_selected == true) {
+                var el = $('.image-product:first').clone(true).appendTo('.image-container');
+                el.find('.crop-result').attr("src", response);
+            }
+        })
     });
 });
