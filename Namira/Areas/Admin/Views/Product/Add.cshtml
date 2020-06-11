@@ -7,7 +7,7 @@
 
     <div class="container">
         <h1>@ViewBag.Title</h1>
-        <form asp-area="Admin" asp-action="@action" asp-controller="Product" method="post">
+        <form asp-area="Admin" asp-action="@action" asp-controller="Product" method="post" class="product-form">
             <ul class="nav nav-tabs">
                 @{ int i = 0; }
                 @foreach (var item in Model.Languages)
@@ -25,7 +25,7 @@
                     <input asp-for="@Model.ProductLanguages[@j].Id" type="hidden" />
 
                     var status = j == 0 ? "active" : "";
-                    <div class="tab-pane @status" id="@Model.Languages[j].Slug">
+                    <div class="tab-pane fade show @status" id="@Model.Languages[j].Slug">
                         <div class="form-group">
                             <label asp-for="@Model.ProductLanguages[@j].Name">Name</label>
                             <input asp-for="@Model.ProductLanguages[@j].Name" type="text" class="form-control">
@@ -134,69 +134,96 @@
                 <span asp-validation-for="@Model.Product.CategoryId" class="form-text text-muted"></span>
             </div>
 
-            <div class="color">
-                <div class="form-group">
-                    <label>Color</label>
-                    <input type="color" class="form-control">
-                    <span class="form-text text-muted"></span>
-                </div>
-
-                <div class="row size-container" data-count="@Model.Sizes.Count()">
-                    <div class="col-3 size-item">
-                        <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                            <div class="card-header">Header</div>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label>Size</label>
-                                    <select asp-for="@Model.Product.CountryId" asp-items="@Model.Sizes" class="form-control select-size"></select>
-                                    <span class="form-text text-muted"></span>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Quantity</label>
-                                    <input type="number" class="form-control quantity">
-                                    <span class="form-text text-muted"></span>
-                                </div>
-
-                                <div class="form-group delegate">
-                                    <a class="btn btn-success add-size" style="display: block;">Add size</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        Images
+            <div class="product-color-container">
+                <div class="color-product card mb-3">
+                    <div class="card-header color-product-header">
+                        <div class="header-text">Product color</div>
+                        <a class="color-delete btn btn-outline-danger">Delete</a>
                     </div>
                     <div class="card-body">
-                        @*<img class="img-fluid" src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" />*@
-
-                        <div class="upload-demo-wrap">
-                            <div id="crop-image"></div>
-                        </div>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" accept="image/*" class="custom-file-input" id="upload-image">
-                                <label class="custom-file-label" for="inputGroupFile04">Choose image</label>
-                            </div>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-info crop-but" type="button">Crop</button>
-                            </div>
+                        <div class="form-group">
+                            <label>Color</label>
+                            <input type="color" class="form-control">
+                            <span class="form-text text-muted"></span>
                         </div>
 
-                        <div class="row image-container">
-                            <div class="col-3 image-product">
-                                <img class="img-fluid crop-result" />
-                                <a class="delete-image">Delete</a>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active nav-link-size" data-toggle="tab" href="#size-1">Size</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-images" data-toggle="tab" href="#images-1">Images</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active tab-pane-size" id="size-1">
+
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <div class="row size-container" data-count="@Model.Sizes.Count()">
+                                            <div class="col-3 size-item">
+                                                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                                                    <div class="card-header">Header</div>
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label>Size</label>
+                                                            <select asp-for="@Model.Product.CountryId" asp-items="@Model.Sizes" class="form-control select-size"></select>
+                                                            <span class="form-text text-muted"></span>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Quantity</label>
+                                                            <input type="number" class="form-control quantity">
+                                                            <span class="form-text text-muted"></span>
+                                                        </div>
+
+                                                        <div class="form-group delegate">
+                                                            <a class="btn btn-success add add-size">Add size</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade tab-pane-images" id="images-1">
+
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <div class="upload-demo-wrap">
+                                            <div class="crop-image"></div>
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" accept="image/*" class="custom-file-input upload-image">
+                                                <label class="custom-file-label" for="inputGroupFile04">Choose image</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-info crop-but" type="button">Crop</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row image-container">
+                                            <div class="col-3 image-product">
+                                                <img class="img-fluid crop-result" />
+                                                <a class="delete-image">Delete</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
                     </div>
-                </div>
 
+                </div>
             </div>
+
+            <a class="btn btn-info add add-color mt-2">Add color product</a>
         </form>
 
         <div class="toast" role="alert" aria-live="polite" aria-atomic="true" data-delay="5000" style="position: fixed; top: 10px; right: 10px;">
