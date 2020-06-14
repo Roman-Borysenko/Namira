@@ -3,6 +3,7 @@
     var key_name = "item-";
     var image_selected = false; 
     var crop_object = [];
+    var main_object = [];
 
     $('.selectpicker').selectpicker();
 /*--size--*/
@@ -79,31 +80,30 @@
         $(this).closest('.image-product').detach();
     });
 
-    function cropInitializer(el) {
-        $crop = el.find('.crop-image').croppie({
+    function cropInitializer(el, classElement, w, h) {
+        $crop = el.find(classElement).croppie({
             enableExif: true,
             viewport: {
-                width: 400,
-                height: 400,
+                width: w,
+                height: h,
                 type: 'square'
             },
             boundary: {
-                width: 450,
-                height: 450
+                width: w + 100,
+                height: h + 100
             }
         });
 
-        crop_object.push($crop);
         return $crop;
     }
-    /*--end image--*/
-
+/*--end image--*/
+/*--color--*/
     $(".add-color").click(function () {
         var el = $('.color-product:first').clone(false, false).appendTo('.product-color-container');
 
         updateAttrForColor(el, $(".color-product").length);
 
-        cropInitializer(el);
+        crop_object.push(cropInitializer(el, '.crop-image', 400, 400));
     });
 
     $('.product-color-container').on('click', '.color-delete', function () {
@@ -111,7 +111,6 @@
 
         $('.color-product').each(function (i, element) {
             var el = $('.color-product').eq(i);
-            console.log(el);
 
             updateAttrForColor(el, i);
         });
@@ -124,4 +123,38 @@
         el.find('.tab-pane-size').attr("id", "seze-" + index);
         el.find('.tab-pane-images').attr("id", "images-" + index);
     }
+/*--end color--*/
+
+/*--main image--*/
+    main_object.push(cropInitializer($('.main-image'), '.crop-front-image', 205, 283));
+    main_object.push(cropInitializer($('.main-image'), '.crop-back-image', 205, 283));
+
+    $('.upload-main').on('change', function () {
+        var index = $(this).closest('.tab-pane-main').index();
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            main_object[index].croppie('bind', {
+                url: event.target.result
+            }).then(function () {
+                console.log('jQuery bind complete');
+            });
+        }
+        reader.readAsDataURL(this.files[0]);
+        image_selected = true;
+    });
+
+    $('.crop-main-but').on('click', function (event) {
+        var main_element = $(this).closest('.tab-pane-main');
+        var index = main_element.index();
+        main_object[index].croppie('result', {
+            type: 'canvas',
+            size: 'viewport'
+        }).then(function (response) {
+            if (image_selected == true) {
+                main_element.find('.crop-main-image').attr("src", response);
+                main_element.find('.model-image').modal('toggle');
+            }
+        });
+    });
+/*--end main image--*/
 });
