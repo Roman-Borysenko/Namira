@@ -6,7 +6,7 @@ namespace Namira.Entities
     {
         public int Id { get; set; }
         [Required]
-        public string ImagePath { get; set; }
+        public string Image { get; set; }
         [Required]
         public ProductColor ProductColor { get; set; }
     }

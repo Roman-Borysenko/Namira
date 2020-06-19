@@ -33,9 +33,9 @@ namespace Namira.Entities
         public List<ProductLanguage> ProductLanguages { get; set; }
         [Required]
         public List<ProductColor> ProductColors { get; set; }
-        [Required, StringLength(200, MinimumLength = 10)]
+        [Required]
         public string Foreground { get; set; }
-        [Required, StringLength(200, MinimumLength = 10)]
+        [Required]
         public string Background { get; set; }
         [Required]
         public List<NumberPurchase> NumberPurchases { get; set; }

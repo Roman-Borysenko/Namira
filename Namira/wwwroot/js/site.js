@@ -16,12 +16,13 @@
 
         if (data_count > count_item) {
             var el = $(this).closest('.size-item').clone(true).appendTo($('.size-container').get(index));
-            console.log(el);
             el.find('select').val("");
             el.find('.quantity').val(0);
             var parent = $(this).parent();
             $(this).detach();
             parent.html('<a class="btn btn-danger delete-size" style="display: block;">Delete size</a>');
+
+            updateNameSize(index);
         } else {
             $('.toast-body').text("Maximum allowed number of items: " + data_count);
             $('.toast').toast('show');
@@ -32,18 +33,8 @@
         if ($('.size-item').length != 1) {
             $('.select-size option[value=' + selected_size[key_name + $(this).closest('.size-item').index()] + ']').removeAttr("disabled");
             $(this).closest('.size-item').detach();
-        }
-    });
 
-    $('.select-size').change(function () {
-        if (typeof selected_size[$(this).closest('.size-item').index()] === "undefined") {
-            selected_size[key_name + $(this).closest('.size-item').index()] = $(this).val();
-        }
-
-        $('.select-size option').removeAttr("disabled");
-
-        for (key in selected_size) {
-            $('.select-size option[value=' + selected_size[key] + ']').attr("disabled", "disabled");
+            updateName();
         }
     });
 /*--end size--*/
@@ -72,13 +63,35 @@
             if (image_selected == true) {
                 var el = $('.image-product:first').clone(true).appendTo($('.image-container').get(index));
                 el.find('.crop-result').attr("src", response);
+                el.find('.img-input').attr("value", response);
+
+                updateNameImage(index);
             }
         });
     });
     
     $('.product-color-container').on("click", ".delete-image", function () {
         $(this).closest('.image-product').detach();
+        updateName();
     });
+
+    function updateName() {
+        for (var i = 0; i < $('.color-product').length; i++) {
+            $('.color-product').eq(i).attr("data-name", "productColors["+ (i-1) +"]");
+            updateNameSize(i);
+            updateNameImage(i);
+        }
+    }
+
+    function updateNameImage(index) {
+        var element = $(".color-product").eq(index);
+        console.log(index);
+
+        for (var i = 0; i < element.find(".image-product").length; i++) {
+            console.log(element.find(".image-product").eq(i));
+            element.find(".image-product").eq(i).find(".img-input").attr("name", element.attr("data-name") + ".Images[" + (i - 1) + "]");
+        }
+    }
 
     function cropInitializer(el, classElement, w, h) {
         $crop = el.find(classElement).croppie({
@@ -112,7 +125,7 @@
         $('.color-product').each(function (i, element) {
             var el = $('.color-product').eq(i);
 
-            updateAttrForColor(el, i);
+            updateName();
         });
     });
 
@@ -122,6 +135,21 @@
 
         el.find('.tab-pane-size').attr("id", "seze-" + index);
         el.find('.tab-pane-images').attr("id", "images-" + index);
+
+        el.attr("data-name", "productColors[" + (index - 2) + "]");
+        el.find('.color-input').attr("name", "productColors[" + (index - 2) + "].Color");
+
+        updateNameSize(index-1);
+    }
+
+    function updateNameSize(index) {
+        var element = $(".color-product").eq(index);
+        console.log("Method: " + index);
+
+        for (var i = 0; i < element.find(".size-item").length; i++) {
+            element.find(".size-item").eq(i).find(".select-size").attr("name", element.attr("data-name") + ".ColorSizes[" + i + "].SizeId");
+            element.find(".size-item").eq(i).find(".quantity").attr("name", element.attr("data-name") + ".ColorSizes[" + i + "].Quantity");
+        }
     }
 /*--end color--*/
 
@@ -152,6 +180,7 @@
         }).then(function (response) {
             if (image_selected == true) {
                 main_element.find('.crop-main-image').attr("src", response);
+                main_element.find('.crop-main-input').attr("value", response);
                 main_element.find('.model-image').modal('toggle');
             }
         });

@@ -10,6 +10,7 @@ namespace Namira.Areas.Admin.ViewModels
     public class ProductViewModel
     {
         public Product Product { get; set; }
+        public ProductColor ProductColor { get; set; }
         public List<ProductLanguage> ProductLanguages { get; set; }
         public List<Entities.Category> Categories { get; set; }
         public List<Entities.Language> Languages { get; set; }

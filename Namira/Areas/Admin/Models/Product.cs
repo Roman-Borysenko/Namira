@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,11 +28,9 @@ namespace Namira.Areas.Admin.Models
         public int BrandId { get; set; }
         [Required]
         public List<int> FabricsId { get; set; }
-        //[Required]
-        //public List<ProductColor> ProductColors { get; set; }
-        [Required, StringLength(200, MinimumLength = 10)]
+        [Required]
         public string Foreground { get; set; }
-        [Required, StringLength(200, MinimumLength = 10)]
+        [Required]
         public string Background { get; set; }
         [Required]
         public int NumberPurchases { get; set; }

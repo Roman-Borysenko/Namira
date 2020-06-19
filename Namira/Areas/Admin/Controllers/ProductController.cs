@@ -46,5 +46,10 @@ namespace Namira.Areas.Admin.Controllers
         {
             return View(await GetProductViewModel());
         }
+        [HttpPost]
+        public string Add(Product product, List<ProductLanguage> productLanguages, List<ProductColor> productColors)
+        {
+            return $"{product.Price} - {productLanguages[0].Name} - {productColors[0].Color}";
+        }
     }
 }

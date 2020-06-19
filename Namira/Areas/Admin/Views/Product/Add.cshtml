@@ -169,6 +169,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <img class="crop-main-image rounded mx-auto d-block" src="#" />
+                                                    <input type="hidden" asp-for="@Model.Product.Foreground" class="crop-main-input" value="" />
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
@@ -211,6 +212,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <img class="crop-main-image rounded mx-auto d-block" src="#" />
+                                                    <input type="hidden" asp-for="@Model.Product.Background" class="crop-main-input" value="" />
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
@@ -240,7 +242,7 @@
             </div>
 
             <div class="product-color-container">
-                <div class="color-product card mb-3">
+                <div class="color-product card mb-3" data-name="">
                     <div class="card-header color-product-header">
                         <div class="header-text">Product color</div>
                         <a class="color-delete btn btn-outline-danger">Delete</a>
@@ -248,7 +250,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>Color</label>
-                            <input type="color" class="form-control">
+                            <input type="color" class="form-control color-input" name="">
                             <span class="form-text text-muted"></span>
                         </div>
 
@@ -272,13 +274,13 @@
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label>Size</label>
-                                                            <select asp-for="@Model.Product.CountryId" asp-items="@Model.Sizes" class="form-control select-size"></select>
+                                                            <select asp-items="@Model.Sizes" name="" class="form-control select-size"></select>
                                                             <span class="form-text text-muted"></span>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Quantity</label>
-                                                            <input type="number" class="form-control quantity">
+                                                            <input type="number" class="form-control quantity" name="">
                                                             <span class="form-text text-muted"></span>
                                                         </div>
 
@@ -313,6 +315,7 @@
                                         <div class="row image-container">
                                             <div class="col-3 image-product">
                                                 <img class="img-fluid crop-result" />
+                                                <input class="img-input" type="hidden" value="" name="" />
                                                 <a class="delete-image">Delete</a>
                                             </div>
                                         </div>
@@ -354,8 +357,8 @@
 }
 
 @section scripts{
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    @*<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap-select.js"></script>
     <script src="~/lib/crop/croppie.js"></script>
