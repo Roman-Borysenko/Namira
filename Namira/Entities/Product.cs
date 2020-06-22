@@ -19,7 +19,7 @@ namespace Namira.Entities
         public int Discount { get; set; }
         [Required, Range(1, 5)]
         public int Raiting { get; set; }
-        [MinLength(0)]
+        [Range(0, 1000000)]
         public int View { get; set; }
         [Required]
         public Category Category { get; set; }
@@ -28,15 +28,15 @@ namespace Namira.Entities
         [Required]
         public Brand Brand { get; set; }
         [Required]
-        public List<Fabric> Fabrics { get; set; }
+        public List<ProductFabric> ProductFabrics { get; set; }
         [Required]
         public List<ProductLanguage> ProductLanguages { get; set; }
         [Required]
         public List<ProductColor> ProductColors { get; set; }
         [Required]
-        public string Foreground { get; set; }
+        public byte[] Foreground { get; set; }
         [Required]
-        public string Background { get; set; }
+        public byte[] Background { get; set; }
         [Required]
         public List<NumberPurchase> NumberPurchases { get; set; }
         [Required]

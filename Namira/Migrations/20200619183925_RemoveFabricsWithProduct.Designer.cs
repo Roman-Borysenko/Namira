@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Namira.Data;
 
 namespace Namira.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200619183925_RemoveFabricsWithProduct")]
+    partial class RemoveFabricsWithProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,9 +219,9 @@ namespace Namira.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("Background")
+                    b.Property<string>("Background")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
@@ -236,9 +238,9 @@ namespace Namira.Migrations
                     b.Property<int>("Discount")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Foreground")
+                    b.Property<string>("Foreground")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -288,21 +290,6 @@ namespace Namira.Migrations
                     b.ToTable("ProductColors");
                 });
 
-            modelBuilder.Entity("Namira.Entities.ProductFabric", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FabricId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "FabricId");
-
-                    b.HasIndex("FabricId");
-
-                    b.ToTable("ProductFabric");
-                });
-
             modelBuilder.Entity("Namira.Entities.ProductImage", b =>
                 {
                     b.Property<int>("Id")
@@ -310,9 +297,9 @@ namespace Namira.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("Image")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductColorId")
                         .HasColumnType("int");
@@ -473,21 +460,6 @@ namespace Namira.Migrations
                 {
                     b.HasOne("Namira.Entities.Product", "Product")
                         .WithMany("ProductColors")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Namira.Entities.ProductFabric", b =>
-                {
-                    b.HasOne("Namira.Entities.Fabric", "Fabric")
-                        .WithMany("ProductFabrics")
-                        .HasForeignKey("FabricId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Namira.Entities.Product", "Product")
-                        .WithMany("ProductFabrics")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

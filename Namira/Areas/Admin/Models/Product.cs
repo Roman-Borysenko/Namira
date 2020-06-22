@@ -18,7 +18,7 @@ namespace Namira.Areas.Admin.Models
         public int Discount { get; set; }
         [Required, Range(1, 5)]
         public int Raiting { get; set; }
-        [MinLength(0)]
+        [Range(0, 1000000)]
         public int View { get; set; }
         [Required]
         public int CategoryId { get; set; }

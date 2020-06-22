@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Namira.Data;
 
 namespace Namira.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200620230446_UpdateTypeFieldForImage")]
+    partial class UpdateTypeFieldForImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,9 +219,9 @@ namespace Namira.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("Background")
+                    b.Property<string>("Background")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
@@ -236,9 +238,9 @@ namespace Namira.Migrations
                     b.Property<int>("Discount")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Foreground")
+                    b.Property<string>("Foreground")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -310,9 +312,9 @@ namespace Namira.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("Image")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("ProductColorId")
                         .HasColumnType("int");

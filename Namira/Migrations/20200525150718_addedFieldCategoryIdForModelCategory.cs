@@ -6,13 +6,13 @@ namespace Namira.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Categories_Categories_CategoryId",
-                table: "Categories");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Categories_Categories_CategoryId",
+            //    table: "Categories");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Categories_CategoryId",
-                table: "Categories");
+            //migrationBuilder.DropIndex(
+            //    name: "IX_Categories_CategoryId",
+            //    table: "Categories");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

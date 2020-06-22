@@ -6,53 +6,53 @@ namespace Namira.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Categories_Languages_LanguageId",
-                table: "Categories");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Categories_Languages_LanguageId",
+            //    table: "Categories");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Countries_Languages_LanguageId",
-                table: "Countries");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Countries_Languages_LanguageId",
+            //    table: "Countries");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Fabrics_Languages_LanguageId",
-                table: "Fabrics");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_Fabrics_Languages_LanguageId",
+            //    table: "Fabrics");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Countries_LanguageId",
-                table: "Countries");
+            //migrationBuilder.DropIndex(
+            //    name: "IX_Countries_LanguageId",
+            //    table: "Countries");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Categories_LanguageId",
-                table: "Categories");
+            //migrationBuilder.DropIndex(
+            //    name: "IX_Categories_LanguageId",
+            //    table: "Categories");
 
-            migrationBuilder.DropColumn(
-                name: "LanguageId",
-                table: "Countries");
+            //migrationBuilder.DropColumn(
+            //    name: "LanguageId",
+            //    table: "Countries");
 
-            migrationBuilder.AlterColumn<int>(
-                name: "LanguageId",
-                table: "Fabrics",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
+            //migrationBuilder.AlterColumn<int>(
+            //    name: "LanguageId",
+            //    table: "Fabrics",
+            //    nullable: false,
+            //    oldClrType: typeof(int),
+            //    oldType: "int",
+            //    oldNullable: true);
 
-            migrationBuilder.AlterColumn<int>(
-                name: "LanguageId",
-                table: "Categories",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
+            //migrationBuilder.AlterColumn<int>(
+            //    name: "LanguageId",
+            //    table: "Categories",
+            //    nullable: false,
+            //    oldClrType: typeof(int),
+            //    oldType: "int",
+            //    oldNullable: true);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Fabrics_Languages_LanguageId",
-                table: "Fabrics",
-                column: "LanguageId",
-                principalTable: "Languages",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_Fabrics_Languages_LanguageId",
+            //    table: "Fabrics",
+            //    column: "LanguageId",
+            //    principalTable: "Languages",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

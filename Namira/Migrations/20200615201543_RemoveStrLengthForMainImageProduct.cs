@@ -6,31 +6,31 @@ namespace Namira.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ImagePath",
-                table: "ProductImages");
+            //migrationBuilder.DropColumn(
+            //    name: "ImagePath",
+            //    table: "ProductImages");
 
-            migrationBuilder.AlterColumn<string>(
-                name: "Foreground",
-                table: "Products",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(200)",
-                oldMaxLength: 200);
+            //migrationBuilder.AlterColumn<string>(
+            //    name: "Foreground",
+            //    table: "Products",
+            //    nullable: false,
+            //    oldClrType: typeof(string),
+            //    oldType: "nvarchar(200)",
+            //    oldMaxLength: 200);
 
-            migrationBuilder.AlterColumn<string>(
-                name: "Background",
-                table: "Products",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(200)",
-                oldMaxLength: 200);
+            //migrationBuilder.AlterColumn<string>(
+            //    name: "Background",
+            //    table: "Products",
+            //    nullable: false,
+            //    oldClrType: typeof(string),
+            //    oldType: "nvarchar(200)",
+            //    oldMaxLength: 200);
 
-            migrationBuilder.AddColumn<string>(
-                name: "Image",
-                table: "ProductImages",
-                nullable: false,
-                defaultValue: "");
+            //migrationBuilder.AddColumn<string>(
+            //    name: "Image",
+            //    table: "ProductImages",
+            //    nullable: false,
+            //    defaultValue: "");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

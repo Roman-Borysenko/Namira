@@ -10,7 +10,7 @@ namespace Namira.Entities
         [Required, Column("ProductId")]
         public Product Product { get; set; }
         [Required, StringLength(7)]
-        public string Colors { get; set; }
+        public string Color { get; set; }
         [Required]
         public List<ProductSize> ProductSizes { get; set; }
         [Required]

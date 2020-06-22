@@ -6,10 +6,10 @@ namespace Namira.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "LanguageGroup",
-                table: "Categories",
-                nullable: true);
+            //migrationBuilder.AddColumn<string>(
+            //    name: "LanguageGroup",
+            //    table: "Categories",
+            //    nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

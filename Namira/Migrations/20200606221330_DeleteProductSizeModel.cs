@@ -6,8 +6,8 @@ namespace Namira.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ProductSizes");
+            //migrationBuilder.DropTable(
+            //    name: "ProductSizes");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

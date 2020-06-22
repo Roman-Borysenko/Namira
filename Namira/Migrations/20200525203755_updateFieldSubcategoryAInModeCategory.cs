@@ -6,18 +6,18 @@ namespace Namira.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateIndex(
-                name: "IX_Categories_CategoryId",
-                table: "Categories",
-                column: "CategoryId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Categories_CategoryId",
+            //    table: "Categories",
+            //    column: "CategoryId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Categories_Categories_CategoryId",
-                table: "Categories",
-                column: "CategoryId",
-                principalTable: "Categories",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_Categories_Categories_CategoryId",
+            //    table: "Categories",
+            //    column: "CategoryId",
+            //    principalTable: "Categories",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

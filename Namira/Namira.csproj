@@ -13,6 +13,20 @@
     <Compile Remove="Migrations\20200521195805_editedModels.Designer.cs" />
     <Compile Remove="Migrations\20200525203704_updateFieldsCategoryAndLanguageInModeCategory.cs" />
     <Compile Remove="Migrations\20200525203704_updateFieldsCategoryAndLanguageInModeCategory.Designer.cs" />
+    <Compile Remove="Migrations\20200619132343_ReplacedAttributeForPropertyView.cs" />
+    <Compile Remove="Migrations\20200619132343_ReplacedAttributeForPropertyView.Designer.cs" />
+    <Compile Remove="Migrations\20200619171550_RenamePropertyColor.cs" />
+    <Compile Remove="Migrations\20200619171550_RenamePropertyColor.Designer.cs" />
+    <Compile Remove="Migrations\20200619190852_ManyToManyProductFabric.cs" />
+    <Compile Remove="Migrations\20200619190852_ManyToManyProductFabric.Designer.cs" />
+    <Compile Remove="Migrations\20200621143534_UpdateFormatFieldForImage.cs" />
+    <Compile Remove="Migrations\20200621143534_UpdateFormatFieldForImage.Designer.cs" />
+    <Compile Remove="Migrations\20200621164430_UpdateFormatFieldForImage.cs" />
+    <Compile Remove="Migrations\20200621164430_UpdateFormatFieldForImage.Designer.cs" />
+    <Compile Remove="Migrations\20200621165115_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200621165115_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200621165954_UpdateFormatFieldForImage.cs" />
+    <Compile Remove="Migrations\20200621165954_UpdateFormatFieldForImage.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

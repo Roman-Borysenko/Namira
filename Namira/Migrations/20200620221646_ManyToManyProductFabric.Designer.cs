@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Namira.Data;
 
 namespace Namira.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200620221646_ManyToManyProductFabric")]
+    partial class ManyToManyProductFabric
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,6 +153,9 @@ namespace Namira.Migrations
                         .HasColumnType("nvarchar(120)")
                         .HasMaxLength(120);
 
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Slug")
                         .IsRequired()
                         .HasColumnType("nvarchar(140)")
@@ -159,6 +164,8 @@ namespace Namira.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("LanguageId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Fabrics");
                 });
@@ -217,9 +224,9 @@ namespace Namira.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("Background")
+                    b.Property<string>("Background")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
@@ -236,9 +243,9 @@ namespace Namira.Migrations
                     b.Property<int>("Discount")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Foreground")
+                    b.Property<string>("Foreground")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -310,9 +317,9 @@ namespace Namira.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<byte[]>("Image")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductColorId")
                         .HasColumnType("int");
@@ -437,6 +444,10 @@ namespace Namira.Migrations
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Namira.Entities.Product", null)
+                        .WithMany("Fabrics")
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("Namira.Entities.NumberPurchase", b =>
