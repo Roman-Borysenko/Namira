@@ -256,14 +256,14 @@
 
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active nav-link-size" data-toggle="tab" href="#size-1">Size</a>
+                                <a class="nav-link active nav-link-size" data-toggle="tab" href="#size-h">Size</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link nav-link-images" data-toggle="tab" href="#images-1">Images</a>
+                                <a class="nav-link nav-link-images" data-toggle="tab" href="#images-h">Images</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade show active tab-pane-size" id="size-1">
+                            <div class="tab-pane fade show active tab-pane-size" id="size-h">
 
                                 <div class="card mt-2">
                                     <div class="card-body">
@@ -295,7 +295,7 @@
                                 </div>
 
                             </div>
-                            <div class="tab-pane fade tab-pane-images" id="images-1">
+                            <div class="tab-pane fade tab-pane-images" id="images-h">
 
                                 <div class="card mt-2">
                                     <div class="card-body">
@@ -330,6 +330,116 @@
 
                 </div>
             </div>
+
+            <!---->
+            @if (Model.ProductColors != null && Model.ProductColors.Count > 0)
+            {
+                @for (int j = 0; j < Model.ProductColors.Count; j++)
+                {
+                    Write(Model.ProductColors[j].Color);
+                    <div class="product-color-container" style="display: block !important;">
+                        <div class="color-product card mb-3" data-name="">
+                            <div class="card-header color-product-header">
+                                <div class="header-text">Product color</div>
+                                <a class="color-delete btn btn-outline-danger">Delete</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label asp-for="@Model.ProductColors[j].Color">Color</label>
+                                    <input type="color" class="form-control color-input" asp-for="@Model.ProductColors[j].Color">
+                                    <span asp-validation-for="@Model.ProductColors[j].Color" class="form-text text-muted"></span>
+                                </div>
+
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active nav-link-size" data-toggle="tab" href="#size-1">Size</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-link-images" data-toggle="tab" href="#images-1">Images</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active tab-pane-size" id="size-1">
+
+                                        <div class="card mt-2">
+                                            <div class="card-body">
+                                                <div class="row size-container" data-count="@Model.Sizes.Count()">
+                                                    @if (@Model.ProductColors[j].ColorSizes != null && @Model.ProductColors[j].ColorSizes.Count > 0)
+                                                    {
+                                                        for (var s = 0; s < @Model.ProductColors[j].ColorSizes.Count; s++)
+                                                        {
+                                                            <div class="col-3 size-item">
+                                                                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                                                                    <div class="card-header">Header</div>
+                                                                    <div class="card-body">
+                                                                        <div class="form-group">
+                                                                            <label asp-for="@Model.ProductColors[j].ColorSizes[s].SizeId">Size</label>
+                                                                            <select asp-items="@Model.Sizes" asp-for="@Model.ProductColors[j].ColorSizes[s].SizeId" class="form-control select-size"></select>
+                                                                            <span asp-validation-for="@Model.ProductColors[j].ColorSizes[s].SizeId" class="form-text text-muted"></span>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label asp-for="@Model.ProductColors[j].ColorSizes[s].Quantity">Quantity</label>
+                                                                            <input type="number" class="form-control quantity" asp-for="@Model.ProductColors[j].ColorSizes[s].Quantity">
+                                                                            <span asp-validation-for="@Model.ProductColors[j].ColorSizes[s].Quantity" class="form-text text-muted"></span>
+                                                                        </div>
+
+                                                                        <div class="form-group delegate">
+                                                                            <a class="btn btn-success add add-size">Add size</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="tab-pane fade tab-pane-images" id="images-1">
+
+                                        <div class="card mt-2">
+                                            <div class="card-body">
+                                                <div class="upload-demo-wrap">
+                                                    <div class="crop-image"></div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" accept="image/*" class="custom-file-input upload-image">
+                                                        <label class="custom-file-label" for="inputGroupFile04">Choose image</label>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-info crop-but" type="button">Crop</button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row image-container">
+                                                    @if (@Model.ProductColors[j].Images != null && @Model.ProductColors[j].Images.Count > 0)
+                                                    {
+                                                        @foreach (var image in @Model.ProductColors[j].Images)
+                                                        {
+                                                            <div class="col-3 image-product">
+                                                                <img class="img-fluid crop-result" src="@image" />
+                                                                <input class="img-input" type="hidden" asp-for="@image" />
+                                                                <a class="delete-image">Delete</a>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            }
 
             <a class="btn btn-info add add-color mt-2">Add color product</a>
         </form>

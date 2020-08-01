@@ -33,6 +33,7 @@ namespace Namira.Areas.Admin.Controllers
 
             var productViewModel = new ProductViewModel()
             {
+                Product = new Product(),
                 ProductLanguages = products,
                 Categories = await context.Categories.Where(c => c.LanguageId == 1).ToListAsync(),
                 Languages = await context.Languages.ToListAsync(),
@@ -49,8 +50,17 @@ namespace Namira.Areas.Admin.Controllers
             return View(await GetProductViewModel());
         }
         [HttpPost]
-        public async Task<string> Add(Product product, List<ProductLanguage> productLanguages, List<ProductColor> productColors)
+        public async Task<IActionResult> Add(Product product, List<ProductLanguage> productLanguages, List<ProductColor> productColors)
         {
+            if(!ModelState.IsValid)
+            {
+                var productViewModel = await GetProductViewModel();
+                productViewModel.Product = product;
+                productViewModel.ProductLanguages = productLanguages;
+                productViewModel.ProductColors = productColors;
+
+                return View(productViewModel);
+            }
             var mappedProductSize = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<ColorSize, Entities.ProductSize>()
                 .ForMember("Size", opt => opt.MapFrom(src => context.Sizes.SingleOrDefault(s => s.Id == src.SizeId)))
             ));
@@ -90,7 +100,7 @@ namespace Namira.Areas.Admin.Controllers
             await context.AddAsync(entitieProducts);
             await context.SaveChangesAsync();
 
-            return $"Ok";
+            return RedirectToAction("Index");
         }
     }
 }
