@@ -13,9 +13,9 @@ namespace Namira.Areas.Admin.Controllers
     public class BrandController : Controller
     {
         private DataContext context;
-        public BrandController()
+        public BrandController(DataContext dataContext)
         {
-            context = new DataContext();
+            context = dataContext;
         }
         public async Task<IActionResult> Index(int id = 1)
         {

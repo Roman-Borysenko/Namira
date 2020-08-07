@@ -13,9 +13,9 @@ namespace Namira.Areas.Admin.Controllers
     public class CountryController : Controller
     {
         private DataContext context;
-        public CountryController()
+        public CountryController(DataContext dataContext)
         {
-            context = new DataContext();
+            context = dataContext;
         }
         public async Task<IActionResult> Index(int id = 1)
         {

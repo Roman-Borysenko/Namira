@@ -13,9 +13,9 @@ namespace Namira.Areas.Admin.Controllers
     public class CurrencyController : Controller
     {
         private DataContext context;
-        public CurrencyController()
+        public CurrencyController(DataContext dataContext)
         {
-            context = new DataContext();
+            context = dataContext;
         }
         public async Task<IActionResult> Index(int id = 1)
         {

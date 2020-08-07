@@ -16,9 +16,9 @@ namespace Namira.Areas.Admin.Controllers
     public class FabricController : Controller
     {
         private DataContext context;
-        public FabricController()
+        public FabricController(DataContext dataContext)
         {
-            context = new DataContext();
+            context = dataContext;
         }
         public async Task<IActionResult> Index(int id = 1)
         {

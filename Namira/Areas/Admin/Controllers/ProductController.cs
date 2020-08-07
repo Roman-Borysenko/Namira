@@ -17,9 +17,9 @@ namespace Namira.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private DataContext context;
-        public ProductController()
+        public ProductController(DataContext dataContext)
         {
-            context = new DataContext();
+            context = dataContext;
         }
         public IActionResult Index()
         {

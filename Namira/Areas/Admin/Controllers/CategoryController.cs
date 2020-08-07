@@ -19,9 +19,9 @@ namespace Namira.Areas.Admin.Controllers
     public class CategoryController : Controller
     {
         private DataContext context;
-        public CategoryController()
+        public CategoryController(DataContext dataContext)
         {
-            context = new DataContext();
+            context = dataContext;
         }
         public async Task<IActionResult> Index(int id = 1)
         {

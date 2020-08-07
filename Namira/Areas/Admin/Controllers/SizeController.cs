@@ -13,9 +13,9 @@ namespace Namira.Areas.Admin.Controllers
     public class SizeController : Controller
     {
         private DataContext context;
-        public SizeController()
+        public SizeController(DataContext dataContext)
         {
-            context = new DataContext();
+            context = dataContext;
         }
         public async Task<IActionResult> Index(int id = 1)
         {

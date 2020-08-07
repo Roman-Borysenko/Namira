@@ -15,9 +15,9 @@ namespace Namira.Areas.Admin.Controllers
     public class LanguageController : Controller
     {
         private DataContext context;
-        public LanguageController()
+        public LanguageController(DataContext dataContext)
         {
-            context = new DataContext();
+            context = dataContext;
         }
         public async Task<IActionResult> Index(int id = 1)
         {

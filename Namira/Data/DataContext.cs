@@ -2,11 +2,15 @@
 using Microsoft.Extensions.Configuration;
 using Namira.Entities;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Namira.Data
 {
     public class DataContext : DbContext
     {
+        private IConfiguration _configuration;
+        private IWebHostEnvironment _webHost;
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Country> Countries { get; set; }
@@ -20,18 +24,21 @@ namespace Namira.Data
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductSize> ProductSize { get; set; }
         public DbSet<Size> Sizes { get; set; }
-        public DataContext()
+        public DataContext(IConfiguration configuration, IWebHostEnvironment webHost)
         {
+            _configuration = configuration;
+            _webHost = webHost;
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder();
-            builder.SetBasePath(Directory.GetCurrentDirectory());
-            builder.AddJsonFile("appsettings.json");
-            var config = builder.Build();
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+            if(_webHost.IsEnvironment("Ubuntu")) 
+            {
+                optionsBuilder.UseSqlServer(_configuration.GetConnectionString("UbuntuConnection"));
+                return;
+            }
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
