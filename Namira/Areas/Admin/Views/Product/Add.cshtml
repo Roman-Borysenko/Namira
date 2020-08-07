@@ -319,25 +319,20 @@
                                                 <a class="delete-image">Delete</a>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
 
                             </div>
+
                         </div>
-
                     </div>
-
                 </div>
-            </div>
 
-            <!---->
-            @if (Model.ProductColors != null && Model.ProductColors.Count > 0)
-            {
-                @for (int j = 0; j < Model.ProductColors.Count; j++)
+                <!---->
+                @if (Model.ProductColors != null && Model.ProductColors.Count > 0)
                 {
-                    Write(Model.ProductColors[j].Color);
-                    <div class="product-color-container" style="display: block !important;">
+                    @for (int j = 0; j < Model.ProductColors.Count; j++)
+                    {
                         <div class="color-product card mb-3" data-name="">
                             <div class="card-header color-product-header">
                                 <div class="header-text">Product color</div>
@@ -352,14 +347,14 @@
 
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a class="nav-link active nav-link-size" data-toggle="tab" href="#size-1">Size</a>
+                                        <a class="nav-link active nav-link-size" data-toggle="tab" href="#size-@j">Size</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link nav-link-images" data-toggle="tab" href="#images-1">Images</a>
+                                        <a class="nav-link nav-link-images" data-toggle="tab" href="#images-@j">Images</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div class="tab-pane fade show active tab-pane-size" id="size-1">
+                                    <div class="tab-pane fade show active tab-pane-size" id="size-@j">
 
                                         <div class="card mt-2">
                                             <div class="card-body">
@@ -397,7 +392,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="tab-pane fade tab-pane-images" id="images-1">
+                                    <div class="tab-pane fade tab-pane-images" id="images-@j">
 
                                         <div class="card mt-2">
                                             <div class="card-body">
@@ -417,29 +412,25 @@
                                                 <div class="row image-container">
                                                     @if (@Model.ProductColors[j].Images != null && @Model.ProductColors[j].Images.Count > 0)
                                                     {
-                                                        @foreach (var image in @Model.ProductColors[j].Images)
+                                                        @for (int l = 0; l < @Model.ProductColors[j].Images.Count; l++)
                                                         {
-                                                            <div class="col-3 image-product">
-                                                                <img class="img-fluid crop-result" src="@image" />
-                                                                <input class="img-input" type="hidden" asp-for="@image" />
+                                                            <div class="col-3 image-product" style="display: block !important;">
+                                                                <img class="img-fluid crop-result" src="@Model.ProductColors[j].Images[l]" />
+                                                                <input class="img-input" type="hidden" asp-for="@Model.ProductColors[j].Images[l]" />
                                                                 <a class="delete-image">Delete</a>
                                                             </div>
                                                         }
                                                     }
                                                 </div>
-
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-                    </div>
+                    }
                 }
-            }
+            </div>
 
             <a class="btn btn-info add add-color mt-2">Add color product</a>
         </form>
