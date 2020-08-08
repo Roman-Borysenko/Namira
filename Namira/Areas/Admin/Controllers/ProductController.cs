@@ -35,11 +35,11 @@ namespace Namira.Areas.Admin.Controllers
             {
                 Product = new Product(),
                 ProductLanguages = products,
-                Categories = await context.Categories.Where(c => c.LanguageId == 1).ToListAsync(),
+                Categories = await context.Categories.Where(c => c.LanguageId == 2).ToListAsync(),
                 Languages = await context.Languages.ToListAsync(),
                 Brands = new SelectList(await context.Brands.ToListAsync(), "Id", "Name"),
                 Countries = new SelectList(await context.Countries.ToListAsync(), "Id", "Name"),
-                Fabrics = new SelectList(await context.Fabrics.ToListAsync(), "Id", "Name"),
+                Fabrics = new SelectList(await context.Fabrics.Where(c => c.Language.Id == 2).ToListAsync(), "Id", "Name"),
                 Sizes = new SelectList(await context.Sizes.ToListAsync(), "Id", "Name")
             };
 

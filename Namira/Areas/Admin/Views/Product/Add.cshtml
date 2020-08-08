@@ -122,13 +122,6 @@
                     @foreach (var item in Model.Categories)
                     {
                         <option value="@item.Id">@item.Name</option>
-                        if (item.Subcategories != null && item.Subcategories.Count > 0)
-                        {
-                            @foreach (var sub in item.Subcategories)
-                            {
-                                <option value="@sub.Id">@sub.Name</option>
-                            }
-                        }
                     }
                 </select>
                 <span asp-validation-for="@Model.Product.CategoryId" class="form-text text-muted"></span>
@@ -170,6 +163,7 @@
                                                 <div class="modal-body">
                                                     <img class="crop-main-image rounded mx-auto d-block" src="#" />
                                                     <input type="hidden" asp-for="@Model.Product.Foreground" class="crop-main-input" value="" />
+                                                    <span asp-validation-for="@Model.Product.Foreground" class="form-text text-muted"></span>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
@@ -213,6 +207,7 @@
                                                 <div class="modal-body">
                                                     <img class="crop-main-image rounded mx-auto d-block" src="#" />
                                                     <input type="hidden" asp-for="@Model.Product.Background" class="crop-main-input" value="" />
+                                                    <span asp-validation-for="@Model.Product.Background" class="form-text text-muted"></span>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
@@ -458,8 +453,8 @@
 }
 
 @section scripts{
-    @*<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap-select.js"></script>
     <script src="~/lib/crop/croppie.js"></script>

@@ -11,7 +11,7 @@ namespace Namira.Areas.Admin.Models
         public int Id { get; set; }
         [Required, StringLength(120, MinimumLength = 2)]
         public string Name { get; set; }
-        [Required, StringLength(130, MinimumLength = 1)]
+        [StringLength(130, MinimumLength = 1)]
         public string Slug { get; set; }
         [Required, StringLength(10000, MinimumLength = 100)]
         public string Description { get; set; }
