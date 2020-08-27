@@ -21,9 +21,17 @@ namespace Namira.Areas.Admin.Controllers
         {
             context = dataContext;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int id = 1)
         {
-            return View();
+            var paginator = new Paginator()
+            {
+                QuantityRecords = await context.ProductLanguages.CountAsync(),
+                SizePage = 3,
+                Page = id,
+                PaginatorRoute = new Link() { Area = "Admin", Controller = "Category", Action = "Index" }
+            };
+            ViewBag.Paginator = paginator;
+            return View(await context.ProductLanguages.OrderByDescending(c => c.Id).Skip(paginator.Skipped).Take(paginator.SizePage).ToListAsync());
         }
         private async Task<ProductViewModel> GetProductViewModel()
         {
@@ -101,6 +109,23 @@ namespace Namira.Areas.Admin.Controllers
             await context.SaveChangesAsync();
 
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var productView = await GetProductViewModel();
+
+            var product = await context.Products.SingleOrDefaultAsync(p => p.Id == id);
+
+            var productMapped = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Entities.Product, Product>()));
+            var productColorsMapped = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Entities.ProductColor, ProductColor>()));
+            var productLanguagesMapped = new Mapper(new MapperConfiguration(cfg => cfg.CreateMap<Entities.ProductLanguage, ProductLanguage>()));
+
+            productView.Product = productMapped.Map<Product>(product);
+            productView.ProductColors = productColorsMapped.Map<List<ProductColor>>(product.ProductColors);
+            productView.ProductLanguages = productLanguagesMapped.Map<List<ProductLanguage>>(product.ProductLanguages);
+
+            return View("Add", productView);
         }
     }
 }
